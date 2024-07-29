@@ -1,14 +1,19 @@
 Rails.application.routes.draw do
-  get 'reviews/new'
-  get 'reviews/create'
-  get 'reservations/new'
-  get 'reservations/create'
-  get 'style_photos/new'
-  get 'style_photos/create'
-  get 'stylists/index'
-  get 'stylists/show'
-  get 'pages/home'
-  devise_for :stylists
+  root "pages#home"
+
   devise_for :users
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  devise_for :stylists
+
+  resources :stylists, only: [:index, :show] do
+    resources :style_photos, only: [:new, :create]
+    resources :reservations, only: [:new, :create]
+    resources :reviews, only: [:new, :create]
+  end
+
+  resources :style_photos, only: [:show]
+  resources :reservations, only: [:index]
+  resources :reviews, only: [:index]
+
+  # Optional: Tags search
+  resources :tags, only: [:index]
 end

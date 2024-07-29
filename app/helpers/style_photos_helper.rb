@@ -1,0 +1,2 @@
+module StylePhotosHelper
+end

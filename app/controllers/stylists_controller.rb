@@ -1,12 +1,14 @@
+# app/controllers/stylists_controller.rb
 class StylistsController < ApplicationController
-  def index
-    @stylists = Stylist.all
+  before_action :set_stylist, only: [:show, :edit, :update, :destroy, :dashboard]
+
+  def dashboard
+    @reservations = @stylist.reservations.order(:date, :time)
   end
 
-  def show
+  private
+
+  def set_stylist
     @stylist = Stylist.find(params[:id])
-    @style_photos = @stylist.style_photos
-    @reviews = @stylist.reviews
-    @reservation = Reservation.new
   end
 end

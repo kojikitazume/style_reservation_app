@@ -1,0 +1,19 @@
+<h1><%= @stylist.name %>のダッシュボード</h1>
+<table>
+  <thead>
+    <tr>
+      <th>予約日</th>
+      <th>予約時間</th>
+      <th>顧客名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @reservations.each do |reservation| %>
+      <tr>
+        <td><%= reservation.date %></td>
+        <td><%= reservation.time %></td>
+        <td><%= reservation.user.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

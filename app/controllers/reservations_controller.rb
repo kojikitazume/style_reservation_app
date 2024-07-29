@@ -1,15 +1,15 @@
+# app/controllers/reservations_controller.rb
 class ReservationsController < ApplicationController
+  before_action :set_stylist
+
   def new
-    @stylist = Stylist.find(params[:stylist_id])
-    @reservation = @stylist.reservations.new
+    @reservation = @stylist.reservations.build
   end
 
   def create
-    @stylist = Stylist.find(params[:stylist_id])
-    @reservation = @stylist.reservations.new(reservation_params)
-    @reservation.user = current_user
+    @reservation = @stylist.reservations.build(reservation_params)
     if @reservation.save
-      redirect_to stylist_path(@stylist), notice: "Reservation made!"
+      redirect_to @stylist, notice: '予約が成功しました。'
     else
       render :new
     end
@@ -17,7 +17,11 @@ class ReservationsController < ApplicationController
 
   private
 
+  def set_stylist
+    @stylist = Stylist.find(params[:stylist_id])
+  end
+
   def reservation_params
-    params.require(:reservation).permit(:date, :time)
+    params.require(:reservation).permit(:date, :time, :user_id)
   end
 end

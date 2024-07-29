@@ -1,2 +1,6 @@
-<h1>Stylists#index</h1>
-<p>Find me in app/views/stylists/index.html.erb</p>
+<h1>Stylists</h1>
+<% @stylists.each do |stylist| %>
+  <div>
+    <%= link_to stylist.name, stylist_path(stylist) %>
+  </div>
+<% end %>

@@ -1,2 +1,21 @@
-<h1>Stylists#show</h1>
-<p>Find me in app/views/stylists/show.html.erb</p>
+<h1><%= @stylist.name %></h1>
+<%= image_tag @stylist.profile_picture %>
+<%= link_to "New Style Photo", new_stylist_style_photo_path(@stylist) %>
+<%= link_to "New Reservation", new_stylist_reservation_path(@stylist) %>
+<%= link_to "New Review", new_stylist_review_path(@stylist) %>
+
+<h2>Style Photos</h2>
+<% @style_photos.each do |photo| %>
+  <div>
+    <%= image_tag photo.image %>
+    <%= photo.title %>
+  </div>
+<% end %>
+
+<h2>Reviews</h2>
+<% @reviews.each do |review| %>
+  <div>
+    <p><%= review.content %></p>
+    <p>Rating: <%= review.rating %></p>
+  </div>
+<% end %>

@@ -1,0 +1,7 @@
+.zoomable {
+    transition: transform 0.2s;
+  }
+  
+.zoomable.zoomed {
+    transform: scale(1.5);
+  }

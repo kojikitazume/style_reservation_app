@@ -14,6 +14,14 @@ class StylePhotosController < ApplicationController
     end
   end
 
+  def index
+    if params[:tag].present?
+      @style_photos = StylePhoto.joins(:tags).where(tags: { name: params[:tag] })
+    else
+      @style_photos = StylePhoto.all
+    end
+  end
+
   private
 
   def style_photo_params

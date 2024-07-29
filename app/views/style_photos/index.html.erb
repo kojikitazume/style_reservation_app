@@ -1,0 +1,17 @@
+<%= form_with(url: style_photos_path, method: :get, local: true) do |form| %>
+  <div>
+    <%= form.label :query, "検索" %>
+    <%= form.text_field :query %>
+    <%= form.submit "検索" %>
+    <%= form.label :tag, "タグでフィルタ" %>
+    <%= form.text_field :tag %>
+    <%= form.submit "フィルタ" %>
+  </div>
+<% end %>
+
+<% @style_photos.each do |style_photo| %>
+  <div>
+    <h2><%= style_photo.title %></h2>
+    <%= image_tag style_photo.image %>
+  </div>
+<% end %>

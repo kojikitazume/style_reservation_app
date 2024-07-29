@@ -1,4 +1,4 @@
 class StylePhoto < ApplicationRecord
-  belongs_to :stylist
-  has_one_attached :image
+  has_many :style_photos_tags
+  has_many :tags, through: :style_photos_tags
 end

@@ -6,6 +6,11 @@ class Stylist < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  scope :featured, -> { where(featured: true) }
+  scope :newly_registered, -> { where('created_at >= ?', 1.month.ago) }
+  scope :trending, -> { where(trending: true) }
+  
   def average_rating
     reviews.average(:rating).to_f
   end

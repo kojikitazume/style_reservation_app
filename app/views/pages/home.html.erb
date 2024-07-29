@@ -1,2 +1,109 @@
-<h1>Welcome to Style Reservation App</h1>
-<%= link_to "Browse Stylists", stylists_path %>
+<h1 class="display-4">Welcome to Style Reservation App</h1>
+
+<!-- アプリの簡単な説明 -->
+<p class="lead">
+  Welcome to Style Reservation App! Here, you can find and book top stylists for your next haircut or styling session. Browse through our list of talented professionals and discover the perfect stylist for you.
+</p>
+
+<!-- 主要機能へのリンク -->
+<div class="mb-4">
+  <%= link_to "Browse Stylists", stylists_path, class: "btn btn-primary btn-lg" %>
+</div>
+
+<!-- スタイリストのおすすめや特集 -->
+<h2>Featured Stylists</h2>
+<% if @featured_stylists.present? %>
+  <div class="row">
+    <% @featured_stylists.each do |stylist| %>
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <% if stylist.profile_image.attached? %>
+            <%= image_tag stylist.profile_image, class: "card-img-top", alt: "Profile image of #{stylist.name}", style: "height: 200px; object-fit: cover;" %>
+          <% else %>
+            <%= image_tag 'default_profile_image.jpg', class: "card-img-top", alt: "Default profile image", style: "height: 200px; object-fit: cover;" %>
+          <% end %>
+          <div class="card-body">
+            <h5 class="card-title"><%= link_to stylist.name, stylist_path(stylist) %></h5>
+            <p class="card-text"><%= stylist.profile %></p>
+            <% if stylist.average_rating.present? %>
+              <p class="card-text">
+                Rating: <%= number_to_percentage(stylist.average_rating * 20, precision: 1) %>%
+              </p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p>No featured stylists at the moment.</p>
+<% end %>
+
+<!-- 最新のレビュー -->
+<h2>Latest Reviews</h2>
+<% if @recent_reviews.present? %>
+  <div class="row">
+    <% @recent_reviews.each do |review| %>
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><%= review.stylist.name %></h5>
+            <p class="card-text"><%= review.content %></p>
+            <p class="card-text">
+              Rating: <%= number_to_percentage(review.rating * 20, precision: 1) %>%
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p>No recent reviews available.</p>
+<% end %>
+
+<!-- トレンドスタイル -->
+<h2>Trending Styles</h2>
+<% if @trending_styles.present? %>
+  <div class="row">
+    <% @trending_styles.each do |style| %>
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <% if style.image.attached? %>
+            <%= image_tag style.image, class: "card-img-top", alt: "Trending style", style: "height: 200px; object-fit: cover;" %>
+          <% else %>
+            <%= image_tag 'default_style_image.jpg', class: "card-img-top", alt: "Default style image", style: "height: 200px; object-fit: cover;" %>
+          <% end %>
+          <div class="card-body">
+            <p class="card-text"><%= style.description %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p>No trending styles at the moment.</p>
+<% end %>
+
+<!-- 新しいスタイリスト -->
+<h2>New Stylists</h2>
+<% if @new_stylists.present? %>
+  <div class="row">
+    <% @new_stylists.each do |stylist| %>
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <% if stylist.profile_image.attached? %>
+            <%= image_tag stylist.profile_image, class: "card-img-top", alt: "New stylist", style: "height: 200px; object-fit: cover;" %>
+          <% else %>
+            <%= image_tag 'default_profile_image.jpg', class: "card-img-top", alt: "Default profile image", style: "height: 200px; object-fit: cover;" %>
+          <% end %>
+          <div class="card-body">
+            <h5 class="card-title"><%= link_to stylist.name, stylist_path(stylist) %></h5>
+            <p class="card-text"><%= stylist.profile %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p>No new stylists at the moment.</p>
+<% end %>

@@ -8,7 +8,7 @@ class StylePhotosController < ApplicationController
     @stylist = Stylist.find(params[:stylist_id])
     @style_photo = @stylist.style_photos.new(style_photo_params)
     if @style_photo.save
-      redirect_to stylist_path(@stylist), notice: "Style photo uploaded!"
+      redirect_to stylist_path(@stylist), notice: 'Style photo uploaded!'
     else
       render :new
     end

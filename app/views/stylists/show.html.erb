@@ -12,10 +12,13 @@
   </div>
 <% end %>
 
-<h2>Reviews</h2>
-<% @reviews.each do |review| %>
+<h2>レビュー</h2>
+<% @stylist.reviews.each do |review| %>
   <div>
+    <p><strong><%= review.user.name %>さんのレビュー:</strong></p>
     <p><%= review.content %></p>
-    <p>Rating: <%= review.rating %></p>
+    <p>評価: <%= review.rating %></p>
   </div>
 <% end %>
+
+<p>平均評価: <%= @stylist.average_rating %></p>

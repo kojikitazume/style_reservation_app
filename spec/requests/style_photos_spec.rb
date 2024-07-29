@@ -1,18 +1,17 @@
 require 'rails_helper'
 
-RSpec.describe "StylePhotos", type: :request do
-  describe "GET /new" do
-    it "returns http success" do
-      get "/style_photos/new"
+RSpec.describe 'StylePhotos', type: :request do
+  describe 'GET /new' do
+    it 'returns http success' do
+      get '/style_photos/new'
       expect(response).to have_http_status(:success)
     end
   end
 
-  describe "GET /create" do
-    it "returns http success" do
-      get "/style_photos/create"
+  describe 'GET /create' do
+    it 'returns http success' do
+      get '/style_photos/create'
       expect(response).to have_http_status(:success)
     end
   end
-
 end

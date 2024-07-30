@@ -1,0 +1,16 @@
+<%= form_with(model: [@stylist, @reservation], local: true) do |form| %>
+    <div>
+      <%= form.label :date %>
+      <%= form.date_field :date %>
+    </div>
+  
+    <div>
+      <%= form.label :time %>
+      <%= form.time_field :time %>
+    </div>
+  
+    <div>
+      <%= form.submit "Create Reservation" %>
+    </div>
+  <% end %>
+  

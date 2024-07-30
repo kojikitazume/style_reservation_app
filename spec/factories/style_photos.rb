@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :style_photo do
-    title { "MyString" }
+    title { 'MyString' }
     stylist { nil }
   end
 end

@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <% @style_photos.each do |style_photo| %>
+      <div class="col-md-4">
+        <div class="card">
+          <%= image_tag style_photo.image, class: "card-img-top" %>
+          <div class="card-body">
+            <h5 class="card-title"><%= style_photo.title %></h5>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<%= form_with(url: style_photos_path, method: :get, local: true) do |form| %>
+  <div>
+    <%= form.label :query, "検索" %>
+    <%= form.text_field :query %>
+    <%= form.submit "検索" %>
+    <%= form.label :tag, "タグでフィルタ" %>
+    <%= form.text_field :tag %>
+    <%= form.submit "フィルタ" %>
+  </div>
+<% end %>
+
+<% @style_photos.each do |style_photo| %>
+  <div>
+    <h2><%= style_photo.title %></h2>
+    <%= image_tag style_photo.image %>
+  </div>
+<% end %>

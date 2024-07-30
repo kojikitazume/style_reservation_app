@@ -1,0 +1,7 @@
+<%= month_calendar do |date| %>
+  <% if @reservations.where(date: date).any? %>
+    <%= link_to date.day, reservations_path(date: date) %>
+  <% else %>
+    <%= date.day %>
+  <% end %>
+<% end %>

@@ -1,0 +1,24 @@
+<h1><%= @stylist.name %></h1>
+<%= image_tag @stylist.profile_picture %>
+<%= link_to "New Style Photo", new_stylist_style_photo_path(@stylist) %>
+<%= link_to "New Reservation", new_stylist_reservation_path(@stylist) %>
+<%= link_to "New Review", new_stylist_review_path(@stylist) %>
+
+<h2>Style Photos</h2>
+<% @style_photos.each do |photo| %>
+  <div>
+    <%= image_tag photo.image %>
+    <%= photo.title %>
+  </div>
+<% end %>
+
+<h2>レビュー</h2>
+<% @stylist.reviews.each do |review| %>
+  <div>
+    <p><strong><%= review.user.name %>さんのレビュー:</strong></p>
+    <p><%= review.content %></p>
+    <p>評価: <%= review.rating %></p>
+  </div>
+<% end %>
+
+<p>平均評価: <%= @stylist.average_rating %></p>

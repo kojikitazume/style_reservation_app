@@ -1,0 +1,15 @@
+<%= form_with(model: [@stylist, @review], local: true) do |form| %>
+  <div>
+    <%= form.label :content, "レビュー内容" %>
+    <%= form.text_area :content %>
+  </div>
+
+  <div>
+    <%= form.label :rating, "評価 (1-5)" %>
+    <%= form.number_field :rating, min: 1, max: 5 %>
+  </div>
+
+  <div>
+    <%= form.submit "レビューを投稿" %>
+  </div>
+<% end %>

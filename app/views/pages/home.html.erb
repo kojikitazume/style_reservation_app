@@ -1,0 +1,110 @@
+<div class="container py-5">
+  <h1 class="display-4 text-center mb-4">スタイル予約アプリへようこそ！</h1>
+
+  <!-- アプリの簡単な説明 -->
+  <div class="text-center mb-4">
+    <p class="lead">
+      スタイル予約アプリへようこそ！ここでは、お気に入りのスタイリストを見つけて予約することができます。気になるスタイルを
+      探して、あなたにぴったりのスタイリストを見つけてください。
+    </p>
+    <%= link_to "スタイリストを探す", stylists_path, class: "btn btn-primary btn-lg" %>
+  </div>
+
+  <!-- スタイリストのおすすめや特集 -->
+  <h2 class="mb-4">おすすめスタイリスト</h2>
+  <% if @featured_stylists.present? %>
+    <div class="row">
+      <% @featured_stylists.each do |stylist| %>
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm">
+            <% if stylist.profile_image.attached? %>
+              <%= image_tag stylist.profile_image, class: "card-img-top", alt: "スタイリスト#{stylist.name}のプロフィール画像", style: "height: 200px; object-fit: cover;" %>
+            <% else %>
+              <%= image_tag 'default_profile_image.jpg', class: "card-img-top", alt: "デフォルトプロフィール画像", style: "height: 200px; object-fit: cover;" %>
+            <% end %>
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to stylist.name, stylist_path(stylist) %></h5>
+              <p class="card-text"><%= stylist.profile %></p>
+              <% if stylist.average_rating.present? %>
+                <p class="card-text">
+                  評価: <%= number_to_percentage(stylist.average_rating * 20, precision: 1) %>%
+                </p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p>現在、おすすめのスタイリストはいません。</p>
+  <% end %>
+
+  <!-- 最新のレビュー -->
+  <h2 class="mb-4">最新のレビュー</h2>
+  <% if @recent_reviews.present? %>
+    <div class="row">
+      <% @recent_reviews.each do |review| %>
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title"><%= review.stylist.name %></h5>
+              <p class="card-text"><%= review.content %></p>
+              <p class="card-text">
+                評価: <%= number_to_percentage(review.rating * 20, precision: 1) %>%
+              </p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p>最近のレビューはありません。</p>
+  <% end %>
+
+  <!-- トレンドスタイル -->
+  <h2 class="mb-4">トレンドスタイル</h2>
+  <% if @trending_styles.present? %>
+    <div class="row">
+      <% @trending_styles.each do |style| %>
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm">
+            <% if style.image.attached? %>
+              <%= image_tag style.image, class: "card-img-top", alt: "トレンドスタイル", style: "height: 200px; object-fit: cover;" %>
+            <% else %>
+              <%= image_tag 'default_style_image.jpg', class: "card-img-top", alt: "デフォルトスタイル画像", style: "height: 200px; object-fit: cover;" %>
+            <% end %>
+            <div class="card-body">
+              <p class="card-text"><%= style.description %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p>現在、トレンドスタイルはありません。</p>
+  <% end %>
+
+  <!-- 新しいスタイリスト -->
+  <h2 class="mb-4">新しいスタイリスト</h2>
+  <% if @new_stylists.present? %>
+    <div class="row">
+      <% @new_stylists.each do |stylist| %>
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm">
+            <% if stylist.profile_image.attached? %>
+              <%= image_tag stylist.profile_image, class: "card-img-top", alt: "新しいスタイリスト", style: "height: 200px; object-fit: cover;" %>
+            <% else %>
+              <%= image_tag 'default_profile_image.jpg', class: "card-img-top", alt: "デフォルトプロフィール画像", style: "height: 200px; object-fit: cover;" %>
+            <% end %>
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to stylist.name, stylist_path(stylist) %></h5>
+              <p class="card-text"><%= stylist.profile %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p>現在、新しいスタイリストはいません。</p>
+  <% end %>
+</div>

@@ -58,6 +58,7 @@ gem 'bootstrap', '~> 5.2.3'
 gem 'devise'
 gem 'image_processing'
 gem 'simple_calendar'
+gem 'bcrypt', '~> 3.1.7'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 group :development, :test do
   gem 'factory_bot_rails'

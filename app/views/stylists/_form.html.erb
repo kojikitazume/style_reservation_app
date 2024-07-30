@@ -1,0 +1,12 @@
+<%= form_with(model: @stylist, local: true) do |form| %>
+  <!-- 他のフォームフィールド -->
+
+  <div class="form-group">
+    <%= form.label :profile_image, "Profile Image" %>
+    <%= form.file_field :profile_image %>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit %>
+  </div>
+<% end %>

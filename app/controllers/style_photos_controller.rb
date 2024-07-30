@@ -15,11 +15,11 @@ class StylePhotosController < ApplicationController
   end
 
   def index
-    if params[:tag].present?
-      @style_photos = StylePhoto.joins(:tags).where(tags: { name: params[:tag] })
-    else
-      @style_photos = StylePhoto.all
-    end
+    @style_photos = if params[:tag].present?
+                      StylePhoto.joins(:tags).where(tags: { name: params[:tag] })
+                    else
+                      StylePhoto.all
+                    end
   end
 
   private
